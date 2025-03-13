@@ -2,602 +2,304 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Solana Rug Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$HOLMES Token - Crypto Detective</title>
   <style>
-    body {
-      margin: 0; 
-      padding: 0; 
-      background-color: #0f0f0f; 
-      color: #fff;
-      font-family: Arial, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
     }
-    /* Container for top panels */
+    
+    body {
+      background-color: #121212;
+      color: #f0f0f0;
+      overflow-x: hidden;
+    }
+    
     .container {
       max-width: 1200px;
-      margin: 2rem auto;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .hero {
+      height: 100vh;
       display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 0 1rem;
-    }
-    .left-panel, .right-panel {
-      background: #151515;
-      border-radius: 8px;
-      padding: 1.5rem;
-      flex: 1 1 300px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    /* Search Bar */
-    .search-bar {
-      max-width: 1200px;
-      margin: 2rem auto 1rem;
-      display: flex; 
-      gap: 1rem; 
-      padding: 0 1rem;
-    }
-    .search-bar input {
-      flex: 1; 
-      padding: 0.75rem; 
-      font-size: 1rem; 
-      border-radius: 6px;
-      border: 1px solid #333; 
-      background-color: #1c1c1c; 
-      color: #fff;
-    }
-    .search-bar button {
-      padding: 0.75rem 1.5rem; 
-      border: none; 
-      border-radius: 6px;
-      background-color: #28a745; 
-      color: #fff; 
-      font-size: 1rem;
-      cursor: pointer; 
-      transition: background 0.3s;
-    }
-    .search-bar button:hover {
-      background-color: #218838;
-    }
-    /* Left Panel (Token Info) */
-    .token-header {
-      display: flex; 
-      align-items: center; 
-      gap: 1rem; 
-      margin-bottom: 1rem;
-    }
-    .token-logo {
-      width: 48px; 
-      height: 48px; 
-      border-radius: 50%; 
-      background: #333; 
-      object-fit: cover;
-    }
-    .token-title {
-      font-size: 1.5rem; 
-      margin: 0;
-      color: #28a745;
-    }
-    .token-info p {
-      margin: 0.5rem 0;
-    }
-    .secure-label {
-      color: #28a745;
-      font-weight: bold;
-    }
-    .insecure-label {
-      color: #dc3545;
-      font-weight: bold;
-    }
-    /* Right Panel (Analysis) */
-    .right-panel h2 {
-      color: #28a745;
-      margin-top: 0;
-      margin-bottom: 1rem;
-    }
-    .analysis-score {
-      display: flex; 
-      align-items: center; 
-      gap: 1rem; 
-      margin-bottom: 1.5rem;
-    }
-    .analysis-circle {
-      width: 80px; 
-      height: 80px; 
-      border-radius: 50%;
-      background: #333; 
-      display: flex; 
-      align-items: center; 
+      flex-direction: column;
       justify-content: center;
-      font-size: 1.5rem; 
-      font-weight: bold;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
-    .analysis-label {
-      font-size: 1.2rem; 
-      font-weight: bold;
-    }
-    .analysis-sub {
-      color: #ccc;
-    }
-    .risk-factors h3 {
-      margin: 0.5rem 0;
-    }
-    .risk-circles {
-      display: flex; 
-      gap: 0.5rem; 
-      margin-top: 0.5rem;
-    }
-    .risk-circle {
-      width: 30px; 
-      height: 30px; 
+    
+    .logo {
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      font-weight: bold; 
-      color: #000;
-    }
-    .risk-circle.green {
-      background: #28a745;
-    }
-    .risk-circle.yellow {
-      background: #ffc107;
-    }
-    .risk-circle.red {
-      background: #dc3545;
-    }
-    /* Bottom Container for Markets & Top Holders */
-    .bottom-container {
-      max-width: 1200px;
-      margin: 0 auto 2rem;
+      background-color: #6a0dad;
       display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 0 1rem;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 72px;
+      font-weight: bold;
+      border: 6px solid #ffd700;
+      z-index: 2;
+      animation: pulse 2s infinite;
     }
-    .markets-panel, .holders-panel {
-      background: #151515;
-      border-radius: 8px;
-      padding: 1.5rem;
-      flex: 1 1 300px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
-    table {
+    
+    .hero h1 {
+      font-size: 48px;
+      margin-top: 30px;
+      text-align: center;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      z-index: 2;
+    }
+    
+    .hero p {
+      font-size: 24px;
+      margin-top: 20px;
+      text-align: center;
+      max-width: 800px;
+      z-index: 2;
+    }
+    
+    .magnifying-glass {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      animation: fallDown 3s ease-in infinite;
+    }
+    
+    @keyframes fallDown {
+      0% { top: -150px; transform: translateX(-50%) rotate(0deg); }
+      70% { top: 30%; transform: translateX(-50%) rotate(180deg); }
+      85% { top: 25%; transform: translateX(-50%) rotate(160deg); }
+      100% { top: 30%; transform: translateX(-50%) rotate(180deg); }
+    }
+    
+    .footprints {
+      position: absolute;
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="15" viewBox="0 0 30 15"><path d="M5,0 C7.5,0 10,3 10,6 C10,9 7.5,12 5,12 C2.5,12 0,9 0,6 C0,3 2.5,0 5,0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-repeat: space;
+      opacity: 0.3;
+      z-index: 1;
     }
-    th, td {
-      text-align: left;
-      padding: 0.5rem;
-      border-bottom: 1px solid #333;
+    
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 40px;
+      z-index: 2;
     }
-    th {
-      color: #28a745;
+    
+    .cta-button {
+      padding: 15px 30px;
+      background-color: #6a0dad;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid #ffd700;
+    }
+    
+    .cta-button:hover {
+      background-color: #ffd700;
+      color: #121212;
+    }
+    
+    .terminal {
+      width: 500px;
+      height: 300px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 50px;
+      border: 1px solid #444;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    
+    .terminal-header {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .terminal-circle {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .terminal-circle.red { background-color: #ff5f56; }
+    .terminal-circle.yellow { background-color: #ffbd2e; }
+    .terminal-circle.green { background-color: #27c93f; }
+    
+    .terminal-content {
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .typing-effect::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    .detective {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 150px;
+      z-index: 2;
+    }
+    
+    .telegram-highlight {
+      color: #29b6f6;
       font-weight: bold;
     }
-    td {
-      color: #ccc;
-    }
-    /* Updated Markets table header to include Price */
-    .markets-panel table th.price {
-      text-align: right;
-    }
-    .markets-panel table td.price {
-      text-align: right;
-    }
-    /* Responsive */
-    @media(max-width: 800px) {
-      .analysis-score {
-        flex-direction: column; 
-        align-items: flex-start;
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
       }
-      .container, .bottom-container {
+      
+      .hero p {
+        font-size: 18px;
+      }
+      
+      .terminal {
+        width: 90%;
+        height: 250px;
+      }
+      
+      .cta-buttons {
         flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-
-<!-- Search Bar -->
-<div class="search-bar">
-  <input id="tokenAddress" type="text" placeholder="Enter token address" />
-  <button onclick="rugCheck()">Rug Check</button>
-</div>
-
-<!-- Top Panels Container -->
-<div class="container">
-  <!-- Left Panel: Token Info -->
-  <div class="left-panel">
-    <div class="token-header">
-      <img id="tokenLogo" class="token-logo" src="" alt="Token Logo">
-      <h2 id="tokenName" class="token-title">Unknown</h2>
-    </div>
-    <div class="token-info">
-      <p><strong>Token Address:</strong> <span id="tokenAddr">--</span></p>
-      <p><strong>Supply:</strong> <span id="tokenSupply">--</span></p>
-      <p><strong>Mint Authority:</strong> <span id="mintAuth">--</span></p>
-      <p><strong>Freeze Authority:</strong> <span id="freezeAuth">--</span></p>
-      <p><strong>Social Links:</strong> <span id="socialLinks">No info found</span></p>
-    </div>
-  </div>
-
-  <!-- Right Panel: Analysis -->
-  <div class="right-panel">
-    <h2>Token Safety Analysis</h2>
-    <div class="analysis-score">
-      <div class="analysis-circle" id="scoreCircle">--</div>
-      <div>
-        <div class="analysis-label" id="safetyStatus">Unknown</div>
-        <div class="analysis-sub" id="scoreLabel">Safety Score: -- / 100</div>
+  <div class="container">
+    <div class="hero">
+      <div class="footprints"></div>
+      
+      <div class="magnifying-glass">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="35" stroke="#ffd700" stroke-width="8" fill="rgba(106, 13, 173, 0.3)" />
+          <line x1="65" y1="65" x2="95" y2="95" stroke="#ffd700" stroke-width="8" stroke-linecap="round" />
+        </svg>
+      </div>
+      
+      <div class="logo">H</div>
+      <h1>$HOLMES Token</h1>
+      <p>The first crypto detective on the blockchain. Solving mysteries one transaction at a time.</p>
+      
+      <div class="cta-buttons">
+        <button class="cta-button">Buy $HOLMES</button>
+        <button class="cta-button">Join Community</button>
+      </div>
+      
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-circle red"></div>
+          <div class="terminal-circle yellow"></div>
+          <div class="terminal-circle green"></div>
+        </div>
+        <div class="terminal-content">
+          <div id="typing-text" class="typing-effect"></div>
+        </div>
+      </div>
+      
+      <div class="detective">
+        <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Purple body -->
+          <ellipse cx="100" cy="180" rx="60" ry="80" fill="#6a0dad" />
+          
+          <!-- Eye -->
+          <circle cx="100" cy="100" r="40" fill="white" />
+          <circle cx="100" cy="100" r="25" fill="#00a86b" />
+          <circle cx="100" cy="100" r="15" fill="black" />
+          
+          <!-- Hat -->
+          <path d="M50 90 L150 90 L130 50 L70 50 Z" fill="#222" />
+          <rect x="40" y="90" width="120" height="10" fill="#222" />
+          <rect x="70" y="60" width="60" height="10" fill="#dd0000" />
+          <text x="75" y="69" font-family="Arial" font-size="10" fill="white">HOLMES</text>
+          
+          <!-- Coat -->
+          <path d="M40 180 L40 280 L160 280 L160 180" fill="#222" />
+          <path d="M70 180 L70 240 L130 240 L130 180" fill="#222" />
+          <path d="M70 240 L130 240 L130 280 L70 280 Z" fill="#6a0dad" />
+          
+          <!-- Belt -->
+          <rect x="70" y="220" width="60" height="10" fill="#dd0000" />
+          <circle cx="100" cy="225" r="5" fill="#dd0000" />
+          
+          <!-- Magnifying glass -->
+          <circle cx="50" cy="150" r="15" fill="#ddeeff" stroke="#ffd700" stroke-width="3" />
+          <rect x="40" y="160" width="5" height="30" fill="#ffd700" transform="rotate(-30, 40, 160)" />
+        </svg>
       </div>
     </div>
-    <div class="risk-factors">
-      <h3>Risk Factor Count:</h3>
-      <div class="risk-circles">
-        <div class="risk-circle green" id="riskLow">0</div>
-        <div class="risk-circle yellow" id="riskMed">0</div>
-        <div class="risk-circle red" id="riskHigh">0</div>
-      </div>
-    </div>
   </div>
-</div>
-
-<!-- Bottom Container: Markets & Top Holders -->
-<div class="bottom-container">
-  <!-- Markets Panel (Now using Dexscreener API) -->
-  <div class="markets-panel">
-    <h2>Markets</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Market</th>
-          <th>Address</th>
-          <th>Pair</th>
-          <th>LP Mint</th>
-          <th>Liquidity</th>
-          <th class="price">Price (USDC)</th>
-        </tr>
-      </thead>
-      <tbody id="marketsBody">
-        <!-- Populated by JS -->
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Top Holders Panel -->
-  <div class="holders-panel">
-    <h2>Top Holders</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Account</th>
-          <th>Amount</th>
-          <th>Percentage</th>
-        </tr>
-      </thead>
-      <tbody id="holdersBody">
-        <!-- Populated by JS -->
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- Pull in Solana Web3.js library -->
-<script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
-<script>
-  // Your Helius RPC Endpoint
-  const RPC_ENDPOINT = "https://mainnet.helius-rpc.com/?api-key=f7f694d9-993a-46ba-adbf-3e1ec4f29416";
-  // USDC Mint on Solana for reference (to get price in USDC)
-  const USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt";
-  // Token Program ID
-  const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
-
-  let tokenList = [];
-  let tokenListLoaded = false;
-  let connection;
-
-  // Load token list on page load
-  window.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const res = await fetch("https://raw.githubusercontent.com/solana-labs/token-list/main/src/tokens/solana.tokenlist.json");
-      const data = await res.json();
-      tokenList = data.tokens || [];
-      tokenListLoaded = true;
-      console.log("Token list loaded. Count:", tokenList.length);
-    } catch (err) {
-      console.error("Error loading token list:", err);
-    }
-    // For now, clear markets table; it will be populated after rug check if real data is fetched.
-    document.getElementById("marketsBody").innerHTML = "";
-  });
-
-  async function rugCheck() {
-    if (!tokenListLoaded) {
-      alert("Still loading the token list. Please wait a moment and try again!");
-      return;
-    }
-    const inputAddr = document.getElementById('tokenAddress').value.trim();
-    if (!inputAddr) {
-      alert("Please enter a token address!");
-      return;
-    }
-    let publicKey;
-    try {
-      publicKey = new solanaWeb3.PublicKey(inputAddr);
-    } catch (err) {
-      alert("Invalid Solana address!");
-      return;
-    }
-    const fullAddress = publicKey.toBase58();
-    resetUI(fullAddress);
-    connection = new solanaWeb3.Connection(RPC_ENDPOINT);
-
-    try {
-      // Look up token info from the token list
-      const tokenEntry = tokenList.find(t => t.address === fullAddress);
-      if (tokenEntry) {
-        document.getElementById("tokenName").textContent = tokenEntry.name || "Unknown";
-        document.getElementById("tokenLogo").src = tokenEntry.logoURI || "https://via.placeholder.com/48/333/fff?text=No+Logo";
-        if (tokenEntry.extensions) {
-          const ex = tokenEntry.extensions;
-          let links = [];
-          if (ex.website) links.push(`<a href="${ex.website}" target="_blank">Website</a>`);
-          if (ex.twitter) {
-            const twitterHandle = ex.twitter.replace('@','');
-            links.push(`<a href="https://twitter.com/${twitterHandle}" target="_blank">Twitter</a>`);
-          }
-          if (ex.discord) links.push(`<a href="${ex.discord}" target="_blank">Discord</a>`);
-          if (ex.telegram) links.push(`<a href="${ex.telegram}" target="_blank">Telegram</a>`);
-          document.getElementById("socialLinks").innerHTML = links.length ? links.join(" | ") : "No info found";
-        }
-      } else {
-        document.getElementById("tokenName").textContent = "Unknown";
-        document.getElementById("tokenLogo").src = "https://via.placeholder.com/48/333/fff?text=No+Logo";
-      }
-
-      // Fetch on-chain token info
-      const parsedInfo = await connection.getParsedAccountInfo(publicKey);
-      let isMint = false;
-      let isTokenAccount = false;
-      let supply = "--";
-      let mintAuth = "None";
-      let freezeAuth = "None";
-      let decimals = 0;
-      if (parsedInfo.value && parsedInfo.value.data && parsedInfo.value.data.parsed) {
-        const info = parsedInfo.value.data.parsed.info;
-        const type = parsedInfo.value.data.parsed.type;
-        if (type === "mint") {
-          isMint = true;
-          supply = info.supply;
-          mintAuth = info.mintAuthority || "None";
-          freezeAuth = info.freezeAuthority || "None";
-          decimals = info.decimals;
-        } else if (type === "account") {
-          isTokenAccount = true;
-          mintAuth = "(See Mint)";
-          freezeAuth = "(See Mint)";
-        }
-      } else {
-        const rawInfo = await connection.getAccountInfo(publicKey);
-        if (!rawInfo) {
-          console.log("No data found for", fullAddress);
-        }
-      }
-      if (isMint) {
-        const tokenSupply = await connection.getTokenSupply(publicKey);
-        if (tokenSupply.value) {
-          supply = tokenSupply.value.amount;
-        }
-      }
-
-      // Update left panel
-      document.getElementById("tokenAddr").textContent = shortenAddress(fullAddress);
-      document.getElementById("tokenAddr").title = fullAddress;
-      document.getElementById("tokenSupply").textContent = formatNumber(supply);
-      document.getElementById("mintAuth").textContent = (mintAuth === "None") ? "Secure" : "Insecure";
-      document.getElementById("mintAuth").className = (mintAuth === "None") ? "secure-label" : "insecure-label";
-      document.getElementById("freezeAuth").textContent = (freezeAuth === "None") ? "Secure" : "Insecure";
-      document.getElementById("freezeAuth").className = (freezeAuth === "None") ? "secure-label" : "insecure-label";
-
-      const { score, statusLabel, lowCount, medCount, highCount } = computeScoreAndRisk({
-        isMint, isTokenAccount, supply, mintAuth, freezeAuth
-      });
-      document.getElementById("scoreCircle").textContent = score;
-      document.getElementById("scoreLabel").textContent = `Safety Score: ${score} / 100`;
-      document.getElementById("safetyStatus").textContent = statusLabel;
-      document.getElementById("riskLow").textContent = lowCount;
-      document.getElementById("riskMed").textContent = medCount;
-      document.getElementById("riskHigh").textContent = highCount;
-
-      // If it's a mint, fetch market data from Dexscreener and top holders
-      if (isMint && decimals) {
-        const dexscreenerData = await fetchDexscreenerData(fullAddress);
-        if (dexscreenerData && dexscreenerData.pairs && dexscreenerData.pairs.length > 0) {
-          // Map Dexscreener pairs to our table format
-          const markets = dexscreenerData.pairs.map(pair => {
-            // Use baseToken and targetToken symbols to build pair info
-            const pairStr = pair.baseToken && pair.targetToken
-              ? `${pair.baseToken.symbol}/${pair.targetToken.symbol}`
-              : "N/A";
-            return {
-              market: pair.market || "Dex",
-              address: pair.address || "N/A",
-              pair: pairStr,
-              lpMint: pair.lpMint || "N/A",
-              liquidity: pair.liquidity ? "$" + pair.liquidity.toLocaleString() : "N/A",
-              price: pair.priceUsd || "N/A"
-            };
-          });
-          populateMarketsTable(markets);
+  
+  <script>
+    // Typing effect
+    const text = "Initializing AI Agent...\n> Loading detective protocols\n> Scanning blockchain\n> Finding clues\n> AI Agent ACTIVE on Telegram! Join now: @HolmesDetectiveBot\n> Website AI Agent COMING SOON...";
+    let i = 0;
+    const typingElement = document.getElementById('typing-text');
+    
+    function typeWriter() {
+      if (i < text.length) {
+        if (text.substring(i, i+9) === "ACTIVE on") {
+          typingElement.innerHTML += '<span class="telegram-highlight">ACTIVE on Telegram!</span>';
+          i += 20;
+        } else if (text.substring(i, i+17) === "Join now: @Holmes") {
+          typingElement.innerHTML += 'Join now: <span class="telegram-highlight">@HolmesDetectiveBot</span>';
+          i += 29;
         } else {
-          populateMarketsTable([]);
+          typingElement.innerHTML += text.charAt(i);
+          i++;
         }
-        // Fetch top holders data on-chain
-        const topHolders = await fetchTopHolders(connection, fullAddress);
-        populateHoldersTable(topHolders);
-      } else {
-        document.getElementById("marketsBody").innerHTML = "";
-        document.getElementById("holdersBody").innerHTML = "";
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Error fetching token info. Check console.");
-    }
-  }
-
-  // Fetch Dexscreener data for a given mint address
-  async function fetchDexscreenerData(mintAddress) {
-    const url = `https://api.dexscreener.com/latest/dex/tokens/solana/${mintAddress}`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      console.error("Error fetching Dexscreener data:", err);
-      return null;
-    }
-  }
-
-  // Top Holders: Fetch top 5 holders for a given mint
-  async function fetchTopHolders(conn, mintAddress) {
-    const mintPubKey = new solanaWeb3.PublicKey(mintAddress);
-    const accounts = await conn.getParsedProgramAccounts(TOKEN_PROGRAM_ID, {
-      filters: [
-        { dataSize: 165 },
-        { memcmp: { offset: 0, bytes: mintPubKey.toBase58() } }
-      ]
-    });
-    const holders = accounts.map(({ account }) => {
-      const info = account.data.parsed.info;
-      const owner = info.owner;
-      const amount = info.tokenAmount.uiAmount;
-      return { owner, amount };
-    });
-    holders.sort((a, b) => b.amount - a.amount);
-    const total = holders.reduce((sum, h) => sum + h.amount, 0);
-    const top5 = holders.slice(0, 5).map(h => ({
-      ...h,
-      percentage: total > 0 ? ((h.amount / total) * 100).toFixed(2) + "%" : "0%"
-    }));
-    return top5;
-  }
-
-  function populateHoldersTable(topHolders) {
-    const holdersBody = document.getElementById("holdersBody");
-    holdersBody.innerHTML = "";
-    topHolders.forEach(h => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${shortenAddress(h.owner)}</td>
-        <td>${formatNumber(h.amount.toString())}</td>
-        <td>${h.percentage}</td>
-      `;
-      holdersBody.appendChild(row);
-    });
-  }
-
-  function populateMarketsTable(markets) {
-    const marketsBody = document.getElementById("marketsBody");
-    marketsBody.innerHTML = "";
-    if (markets.length === 0) {
-      const row = document.createElement("tr");
-      row.innerHTML = `<td colspan="6" style="text-align:center;">No market data available</td>`;
-      marketsBody.appendChild(row);
-      return;
-    }
-    markets.forEach(m => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${m.market}</td>
-        <td>${m.address}</td>
-        <td>${m.pair}</td>
-        <td>${m.lpMint}</td>
-        <td>${m.liquidity}</td>
-        <td class="price">${m.price}</td>
-      `;
-      marketsBody.appendChild(row);
-    });
-  }
-
-  // Placeholder scoring logic
-  function computeScoreAndRisk({ isMint, isTokenAccount, supply, mintAuth, freezeAuth }) {
-    let score = 50;
-    let statusLabel = "Medium Risk";
-    let lowCount = 0, medCount = 0, highCount = 0;
-    if (isMint) {
-      if (mintAuth === "None") {
-        score += 30; 
-        lowCount += 1;
-      } else {
-        score -= 20;
-        highCount += 1;
-      }
-      if (freezeAuth === "None") {
-        score += 10;
-        lowCount += 1;
-      } else {
-        score -= 10;
-        medCount += 1;
-      }
-    } else if (isTokenAccount) {
-      score -= 5;
-      medCount += 1;
-    } else {
-      score -= 10;
-      highCount += 1;
-    }
-    const numSupply = parseFloat(supply);
-    if (!isNaN(numSupply)) {
-      if (numSupply > 1000000000) {
-        score -= 10;
-        medCount += 1;
-      } else {
-        score += 5;
-        lowCount += 1;
+        
+        setTimeout(typeWriter, Math.random() * 50 + 30);
+        
+        if (text.charAt(i-1) === '\n') {
+          typingElement.innerHTML += '<br>';
+        }
       }
     }
-    if (score < 0) score = 0;
-    if (score > 100) score = 100;
-    if (score >= 80) {
-      statusLabel = "Safe";
-    } else if (score < 50) {
-      statusLabel = "High Risk";
-    }
-    return { score, statusLabel, lowCount, medCount, highCount };
-  }
-
-  function resetUI(fullAddress) {
-    document.getElementById("tokenName").textContent = "Unknown";
-    document.getElementById("tokenLogo").src = "https://via.placeholder.com/48/333/fff?text=No+Logo";
-    document.getElementById("tokenAddr").textContent = shortenAddress(fullAddress);
-    document.getElementById("tokenAddr").title = fullAddress;
-    document.getElementById("tokenSupply").textContent = "--";
-    document.getElementById("mintAuth").textContent = "--";
-    document.getElementById("freezeAuth").textContent = "--";
-    document.getElementById("mintAuth").className = "";
-    document.getElementById("freezeAuth").className = "";
-    document.getElementById("socialLinks").textContent = "No info found";
-    document.getElementById("scoreCircle").textContent = "--";
-    document.getElementById("scoreLabel").textContent = "Safety Score: -- / 100";
-    document.getElementById("safetyStatus").textContent = "Unknown";
-    document.getElementById("riskLow").textContent = "0";
-    document.getElementById("riskMed").textContent = "0";
-    document.getElementById("riskHigh").textContent = "0";
-    document.getElementById("holdersBody").innerHTML = "";
-    document.getElementById("marketsBody").innerHTML = "";
-  }
-
-  function shortenAddress(addr) {
-    if (addr.length <= 8) return addr;
-    return addr.slice(0,4) + "..." + addr.slice(-4);
-  }
-
-  function formatNumber(numStr) {
-    if (numStr === "--") return "--";
-    const n = parseFloat(numStr);
-    if (isNaN(n)) return numStr;
-    return n.toLocaleString();
-  }
-</script>
+    
+    window.onload = function() {
+      setTimeout(typeWriter, 500);
+    };
+  </script>
 </body>
 </html>
